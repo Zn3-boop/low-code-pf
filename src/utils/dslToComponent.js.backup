@@ -1,0 +1,41 @@
+import React from 'react';
+import { getComponent } from './componentRegistry';
+import { handleEvent } from './dsl';
+
+export const dslToComponent = (node, path = []) => {
+  if (!node) {
+    return null;
+  }
+
+  const { id, type, props = {}, events = {}, children = [] } = node;
+  const Component = getComponent(type);
+
+  if (!Component) {
+    console.error(`组件类型 ${type} 未注册`);
+    return React.createElement('div', null, `未知组件: ${type}`);
+  }
+
+  const eventProps = {};
+  Object.entries(events).forEach(([eventName, eventConfig]) => {
+    eventProps[eventName] = (e) => {
+      handleEvent(eventConfig);
+    };
+  });
+
+  const childrenElements = children.map((child, index) =>
+    dslToComponent(child, [...path, index])
+  );
+
+  return React.createElement(
+    Component,
+    { key: path.join('-') || id, id, ...props, ...eventProps },
+    ...childrenElements
+  );
+};
+
+export const dslToComponentTree = (dsl) => {
+  if (!dsl || !dsl.id) {
+    return React.createElement('div', null, 'DSL数据无效');
+  }
+  return dslToComponent(dsl, [dsl.id]);
+};

@@ -1,0 +1,38 @@
+/* Preview.css */
+.preview-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+}
+
+.preview-header {
+  background: #fff;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.preview-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.preview-content {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+}
+
+.preview-content > * {
+  margin-bottom: 16px;
+}
+
+.preview-content > *:last-child {
+  margin-bottom: 0;
+}

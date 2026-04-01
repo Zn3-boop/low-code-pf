@@ -1,0 +1,26 @@
+/* DraggableItem.css */
+.draggable-item {
+  padding: 8px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background: #fff;
+  cursor: move;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.draggable-item:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.draggable-item.dragging {
+  opacity: 0.5;
+}
+
+.component-name {
+  font-size: 14px;
+  color: #333;
+}

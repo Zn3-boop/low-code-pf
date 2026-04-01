@@ -1,0 +1,73 @@
+/* Editor.css */
+.editor-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-header {
+  background: #fff;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  gap: 8px;
+}
+
+.component-sider {
+  background: #f5f5f5;
+  border-right: 1px solid #f0f0f0;
+  overflow-y: auto;
+}
+
+.editor-content {
+  background: #fff;
+  overflow-y: auto;
+  position: relative;
+}
+
+.property-sider {
+  background: #f5f5f5;
+  border-left: 1px solid #f0f0f0;
+  overflow-y: auto;
+}
+
+/* 代码面板样式 */
+.code-drawer .ant-drawer-body {
+  padding: 0;
+}
+
+.code-drawer pre {
+  margin: 0;
+  padding: 16px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* 导出弹窗样式 */
+.export-modal pre {
+  background: #f5f5f5;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
