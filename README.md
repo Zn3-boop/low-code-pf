@@ -26,38 +26,6 @@
 - **动画**：Framer Motion 10.16.0
 - **样式**：Styled Components 6.1.0
 
-## 项目结构
-
-```
-lowcode-platform/
-├── src/
-│   ├── components/      # 通用组件
-│   │   ├── Canvas/     # 画布组件（编辑器和预览）
-│   │   ├── Dnd/        # 拖拽相关组件
-│   │   ├── Panel/      # 面板组件（组件、属性、代码面板）
-│   │   └── Toolbar/    # 工具栏组件
-│   ├── context/        # React Context
-│   │   └── EditorContext.jsx  # 编辑器上下文
-│   ├── materials/      # 物料组件
-│   │   ├── Basic/      # 基础组件（按钮、输入框、卡片等）
-│   │   └── Layout/     # 布局组件（容器、页面）
-│   ├── pages/          # 页面组件
-│   │   ├── Editor/     # 编辑器页面
-│   │   └── Preview/    # 预览页面
-│   ├── utils/          # 工具函数
-│   │   ├── code.js              # 代码生成
-│   │   ├── componentRegistry.js # 组件注册
-│   │   ├── dsl.js               # DSL相关
-│   │   ├── dslToComponent.js    # DSL转组件
-│   │   ├── importExport.js      # 导入导出
-│   │   └── propNormalizer.js    # 属性标准化
-│   ├── App.jsx         # 应用根组件
-│   └── main.jsx        # 应用入口
-├── index.html          # HTML模板
-├── package.json        # 项目配置
-└── vite.config.js      # Vite配置
-```
-
 ## 快速开始
 
 ### 安装依赖
