@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { getAllComponents } from '../../utils/componentRegistry';
 import { useEditor } from '../../context/EditorContext';
 import DraggableItem from '../Dnd/DraggableItem';
+import VirtualizedComponentList from '../Virtualized/VirtualizedComponentList';
 import {
   AppstoreOutlined,
   BlockOutlined,
@@ -77,6 +78,29 @@ const ComponentPanel = () => {
     return acc;
   }, {});
 
+  // 为每个分类创建虚拟化列表
+  const renderVirtualizedList = (comps, category) => {
+    return (
+      <VirtualizedComponentList
+        items={comps}
+        renderItem={(comp, index) => (
+          <DraggableItem
+            key={comp.type}
+            id={`component-${comp.type}`}
+            type={comp.type}
+            label={comp.displayName}
+            onClick={() => {
+              console.log('点击组件:', comp.type);
+              addComponent('page_1', comp.type);
+            }}
+          />
+        )}
+        height={400}
+        itemSize={90}
+      />
+    );
+  };
+
   return (
     <ComponentPanelContainer $theme={theme}>
       <Title>组件库</Title>
@@ -91,24 +115,29 @@ const ComponentPanel = () => {
             {categoryIcons[category]}
             {categoryNames[category] || category}
           </CategoryTitle>
-          <ComponentGrid>
-            {comps.map((comp, index) => (
-              <DraggableItem
-                key={comp.type}
-                id={`component-${comp.type}`}
-                type={comp.type}
-                label={comp.displayName}
-                onClick={() => {
-                  console.log('点击组件:', comp.type);
-                  // 直接添加组件到根节点
-                  addComponent('page_1', comp.type);
-                }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.05 }}
-              />
-            ))}
-          </ComponentGrid>
+          {comps.length > 20 ? (
+            // 当组件数量超过20个时使用虚拟化列表
+            renderVirtualizedList(comps, category)
+          ) : (
+            // 组件数量较少时使用普通网格布局
+            <ComponentGrid>
+              {comps.map((comp, index) => (
+                <DraggableItem
+                  key={comp.type}
+                  id={`component-${comp.type}`}
+                  type={comp.type}
+                  label={comp.displayName}
+                  onClick={() => {
+                    console.log('点击组件:', comp.type);
+                    addComponent('page_1', comp.type);
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.05 }}
+                />
+              ))}
+            </ComponentGrid>
+          )}
         </motion.div>
       ))}
     </ComponentPanelContainer>

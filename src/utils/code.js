@@ -1,9 +1,12 @@
+import { format } from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
+
 // 生成React代码
-export const generateReactCode = (dsl) => {
+export const generateReactCode = async (dsl) => {
   const imports = generateImports(dsl);
   const componentCode = generateComponent(dsl);
 
-  return `
+  const rawCode = `
 ${imports}
 
 export default function GeneratedPage() {
@@ -12,6 +15,23 @@ export default function GeneratedPage() {
   );
 }
 `;
+
+  try {
+    const formattedCode = await format(rawCode, {
+      parser: 'babel',
+      plugins: [parserBabel],
+      semi: true,
+      singleQuote: true,
+      tabWidth: 2,
+      trailingComma: 'es5',
+      printWidth: 100,
+      arrowParens: 'always',
+    });
+    return formattedCode;
+  } catch (error) {
+    console.error('代码格式化失败:', error);
+    return rawCode;
+  }
 };
 
 // 生成导入语句
@@ -77,11 +97,11 @@ const extractComponents = (node, components = {}) => {
 };
 
 // 生成HTML代码
-export const generateHTMLCode = (dsl) => {
+export const generateHTMLCode = async (dsl) => {
   // 实现HTML代码生成逻辑
   const componentCode = generateHTMLComponent(dsl);
 
-  return `
+  const rawCode = `
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -94,6 +114,23 @@ export const generateHTMLCode = (dsl) => {
 </body>
 </html>
 `;
+
+  try {
+    const formattedCode = await format(rawCode, {
+      parser: 'html',
+      plugins: [parserBabel],
+      semi: true,
+      singleQuote: true,
+      tabWidth: 2,
+      trailingComma: 'es5',
+      printWidth: 100,
+      arrowParens: 'always',
+    });
+    return formattedCode;
+  } catch (error) {
+    console.error('HTML格式化失败:', error);
+    return rawCode;
+  }
 };
 
 const generateHTMLComponent = (node, indent = 0) => {
