@@ -184,14 +184,4 @@ export default MyComponent;
 - Safari
 - Edge
 
-## 许可证
 
-MIT
-
-## 贡献
-
-欢迎提交Issue和Pull Request！
-
-## 联系方式
-
-如有问题或建议，请通过Issue联系我们。
